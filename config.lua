@@ -2,6 +2,8 @@ CONFIG = {}
 
 CONFIG.Webhook = 'https://discordapp.com/api/webhooks/webhooklink'
 
+CONFIG.TicketPrice = 0.5 -- The price of each lotto ticket
+
 CONFIG.MaxTickets = 5 -- How many tickets a player can buy per session(Set to 0 if you want unlimited amount)
 
 CONFIG.HighAward = 0 -- 0 Means that it will be all the money there's in the pool!
