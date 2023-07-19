@@ -2,7 +2,7 @@ local RSGCore = exports['rsg-core']:GetCoreObject()
 local PlayerData = RSGCore.Functions.GetPlayerData()
 
 local ped
-local remainingTickets = 5
+local remainingTickets = CONFIG.MaxTickets
 
 function ticketAmount()
     local cid = PlayerData.citizenid
@@ -10,7 +10,7 @@ function ticketAmount()
         header = 'Amount of Tickets',
         inputs = {
             {
-                text = 'Max 5 Tickets',
+                text = 'Max' .. CONFIG.MaxTickets .. ' Tickets',
                 name = 'amount',
                 type = 'number',
                 default = 1
@@ -18,13 +18,17 @@ function ticketAmount()
         }
     })
 
-    if tonumber(amount.amount) > remainingTickets then
-        RSGCore.Functions.Notify('You can\'t buy more than ' .. remainingTickets .. ' more!', 'error', 2000)
-        print('Tickets Remaining: ' .. remainingTickets)
-    else
+    if CONFIG.MaxTickets == 0 then
         TriggerServerEvent('jp-lotto:server:buylotto', amount.amount, cid)
-        remainingTickets = remainingTickets - tonumber(amount.amount)
-        print('Tickets Remaining: ' .. remainingTickets)
+    else
+        if tonumber(amount.amount) > remainingTickets then
+            RSGCore.Functions.Notify('You can\'t buy more than ' .. remainingTickets .. ' more!', 'error', 2000)
+            print('Tickets Remaining: ' .. remainingTickets)
+        else
+            TriggerServerEvent('jp-lotto:server:buylotto', amount.amount, cid)
+            remainingTickets = remainingTickets - tonumber(amount.amount)
+            print('Tickets Remaining: ' .. remainingTickets)
+        end
     end
 end
 
@@ -33,14 +37,13 @@ AddEventHandler('jp-lotto:client:useticket', function()
     local chance = math.random(1, 100)
     local amount = 0
 
-    if chance == 1 then
+    if chance == CONFIG.HighAwardChance then
         RSGCore.Functions.Notify('You won the entire pool!', 'success', 2000)
         TriggerServerEvent('jp-lotto:server:givemoney', 'all')
-    elseif chance > 1 and chance <= 5 then
+    elseif chance > CONFIG.HighAwardChance and chance <= CONFIG.MediumAwardChance then
         RSGCore.Functions.Notify('You won money from the lottery!', 'success', 2000)
         TriggerServerEvent('jp-lotto:server:givemoney', 'medium')
-    elseif chance > 5 and chance <= 20 then -- Changed the logical operator to 'and'
-        amount = math.random(1, 2)
+    elseif chance > CONFIG.MediumAwardChance and chance <= CONFIG.LowAward then -- Changed the logical operator to 'and'
         RSGCore.Functions.Notify('You won money from the lottery!', 'success', 2000)
         TriggerServerEvent('jp-lotto:server:givemoney', 'low')
     elseif chance > 20 then
