@@ -5,7 +5,7 @@ AddEventHandler('jp-lotto:server:buylotto', function(amount, cid)
     local Player = RSGCore.Functions.GetPlayer(source)
     local citizenid = Player.PlayerData.citizenid
     local charname = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname
-    local price = 0.5 * amount
+    local price = CONFIG.TicketPrice * amount
 
     Player.Functions.AddItem('lottoticket', amount)
     Player.Functions.RemoveMoney('cash', price)
