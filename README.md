@@ -23,4 +23,6 @@ CONFIG.LowAward = 20 -- 20%(19% Technically as it's above MediumAwardChance and 
 
 Remember to add lottoticket to your rsg-core/shared/items.lua file!
 
-```['lottoticket'] = {['name'] = 'lottoticket', ['label'] = 'Lottery Ticket', ['weight'] = 50,  ['type'] = 'item', ['image'] = 'lottoticket.png', ['unique'] = false, ['useable'] = true,  ['shouldClose'] = true, ['combinable'] = nil, ['level'] = 0, ['description'] = 'Try your luck!'},```
+```
+['lottoticket'] = {['name'] = 'lottoticket', ['label'] = 'Lottery Ticket', ['weight'] = 50,  ['type'] = 'item', ['image'] = 'lottoticket.png', ['unique'] = false, ['useable'] = true,  ['shouldClose'] = true, ['combinable'] = nil, ['level'] = 0, ['description'] = 'Try your luck!'},
+```
