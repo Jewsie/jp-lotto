@@ -19,7 +19,7 @@ CONFIG.LowAward = math.random(1, 3) -- Can be a sole number, or a random number 
 CONFIG.HighAwardChance = 1 -- Only 1% chance to win the highest reward
 CONFIG.MediumAwardChance = 5 -- 5%(4% Technically as it's above HighAwardChance and up to Selected) chance to win the medium award
 CONFIG.LowAward = 20 -- 20%(19% Technically as it's above MediumAwardChance and up to Selected) chance to win the medium award```
-```
+
 
 Remember to add lottoticket to your rsg-core/shared/items.lua file!
 
